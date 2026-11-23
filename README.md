@@ -4,15 +4,17 @@ Type one of those huge amounts from the news and see it as physical cash: kilos 
 
 Escribí una de esas cifras enormes que salen en las noticias y mirala como plata física: kilos de billetes, maletines, pilas más altas que edificios y elefantes en una balanza.
 
-**Live:** https://soypradito.github.io/how-heavy-is-that-money/
+**Live:** https://fpradomacat.github.io/how-heavy-is-that-money/
 
 ## Features
 
 - One input, one currency picker: USD, EUR, ARS, GBP, MXN and BRL
-- Understands `183,000,340`, `2.5 million`, `900k`, `1.2 billion`, `183.000.340`, `2,5 millones` and `3 billones`
+- Understands `183,000,340`, `2.5 million`, `900k`, `1kk`, `1kkk`, `1.2 billion`, `183.000.340`, `2,5 millones` and `3 billones`
 - Pick the banknote denomination; the result changes a lot with it
-- Weight, volume, stack height, length, area, counting time and per-person split, each matched to a real-world object
+- Weight, volume, stack height, length, area, counting time and per-person split (by the currency's own country), each matched to a real-world object
 - English (default) and Spanish, remembered between visits
+- **Share:** generates a PNG card (post 4:5, story 9:16, link 1.91:1) with the native share sheet on mobile, plus a link that reopens the same amount (`?a=183000340&c=USD&d=100&l=en`)
+- Open Graph / Twitter tags with a preview image (`og-image.png`), so pasted links show a card in WhatsApp, X, LinkedIn, etc.
 - Light and dark mode, responsive, respects `prefers-reduced-motion`
 
 ## How the weight is calculated

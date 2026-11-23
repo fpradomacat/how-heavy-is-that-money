@@ -4,6 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How heavy is that money?</title>
+<meta name="description" content="Type any huge amount of money and see it as physical cash: kilos of banknotes, briefcases, cows and elephants on a scale.">
+<meta name="theme-color" content="#0f4d32">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How heavy is that money?">
+<meta property="og:description" content="Type any huge amount of money and see it as physical cash: kilos of banknotes, briefcases, cows and elephants on a scale.">
+<meta property="og:url" content="https://fpradomacat.github.io/how-heavy-is-that-money/">
+<meta property="og:image" content="https://fpradomacat.github.io/how-heavy-is-that-money/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A balance scale with bundles of banknotes on one side and cows on the other">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How heavy is that money?">
+<meta name="twitter:description" content="Type any huge amount of money and see it as physical cash: kilos of banknotes, briefcases, cows and elephants on a scale.">
+<meta name="twitter:image" content="https://fpradomacat.github.io/how-heavy-is-that-money/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f4d32'/%3E%3Crect x='10' y='18' width='44' height='6' rx='3' fill='%23f5c542'/%3E%3Crect x='29' y='18' width='6' height='32' fill='%23f5c542'/%3E%3Cpath d='M6 38h18q-2 8-9 8t-9-8zM40 38h18q-2 8-9 8t-9-8z' fill='%23f5c542'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -67,6 +84,26 @@ input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid 
 @keyframes pop{from{transform:scale(0)}to{transform:none}}
 .part{display:inline-block;overflow:hidden;height:28px;flex:none}
 .more{font:700 14px Inter,sans-serif;color:var(--muted);align-self:center;margin-left:4px}
+.eqcard{grid-column:1/-1}
+.eqs{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:4px}
+.eq{display:flex;align-items:center;gap:8px;color:var(--acc)}
+.eq span{color:var(--ink)}.card .eq b.num{font-size:26px;font-weight:800;color:var(--acc);margin-right:2px}
+.eq .ic{width:34px;height:34px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.btn{font:600 16px Inter,sans-serif;min-height:44px;padding:10px 18px;border-radius:12px;border:1px solid transparent;background:var(--gold);color:#2b2100;cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
+.btn.ghost{background:transparent;color:#f2faf4;border-color:#4f8a6c}
+.dlg{position:fixed;inset:0;background:rgba(4,15,10,.72);display:grid;place-items:center;padding:16px;z-index:10}
+.dlg[hidden]{display:none}
+.dlg .box{background:var(--bg);color:var(--ink);border-radius:18px;padding:18px;width:min(560px,100%);max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:12px;animation:rise .3s both}
+.dhead{display:flex;justify-content:space-between;align-items:center;gap:12px}.dhead h2{font-size:24px;margin:0}
+.dlg img{width:100%;max-height:55vh;object-fit:contain;border-radius:10px;background:#0f4d32;display:block}
+.dlg .row{display:flex;gap:8px;flex-wrap:wrap}
+.dlg .chip{color:var(--ink);border-color:var(--line)}
+.dlg .chip[aria-pressed=true]{color:#2b2100}
+.dlg .btn.ghost{color:var(--ink);border-color:var(--line)}
+.btn.x{min-width:44px;padding:0}
+.status{font-size:14px;color:var(--muted);min-height:20px;margin:0}
 .sub{color:var(--muted);max-width:68ch;margin:0}
 table{border-collapse:collapse;width:100%;margin-top:18px;font-size:15px}
 th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
@@ -128,7 +165,7 @@ pre,.scroll{overflow-x:auto}
    <h1 data-t="title">How heavy is that money?</h1>
    <p class="lede" data-t="lede"></p>
    <form id="f" class="inrow" autocomplete="off">
-    <input id="amt" inputmode="decimal" value="183,000,340">
+    <input id="amt" type="text" inputmode="text" enterkeyhint="done" autocapitalize="off" autocorrect="off" spellcheck="false" value="183,000,340">
     <select id="cur"></select>
    </form>
    <p class="lbl" data-t="inBills"></p>
@@ -139,6 +176,7 @@ pre,.scroll{overflow-x:auto}
     <p class="k" id="rk"></p>
     <div class="big num" id="rkg">—</div>
     <p class="say" id="rsay"></p>
+    <div class="acts"><button type="button" class="btn" id="shareBtn" data-t="share"></button><button type="button" class="btn ghost" id="copyBtn" data-t="copy"></button></div>
    </div>
   </div>
   <div class="fig" id="fig"><svg id="scale" viewBox="0 0 520 380" role="img"></svg></div>
@@ -170,11 +208,24 @@ pre,.scroll{overflow-x:auto}
 </main>
 <footer class="band"><div class="wrap" data-t="foot"></div></footer>
 
+<div class="dlg" id="dlg" hidden role="dialog" aria-modal="true" aria-labelledby="dlgT">
+ <div class="box">
+  <div class="dhead"><h2 id="dlgT" data-t="shareTitle"></h2><button type="button" class="btn ghost x" id="dlgX" aria-label="Close">✕</button></div>
+  <div class="row" id="fmt"><button type="button" class="chip" data-f="post" aria-pressed="true" data-t="fmtPost"></button><button type="button" class="chip" data-f="story" aria-pressed="false" data-t="fmtStory"></button><button type="button" class="chip" data-f="wide" aria-pressed="false" data-t="fmtWide"></button></div>
+  <img id="prev" alt="">
+  <div class="row"><button type="button" class="btn" id="nativeShare" data-t="shareNow" hidden></button><button type="button" class="btn" id="dl" data-t="download"></button><button type="button" class="btn ghost" id="copy2" data-t="copyText"></button></div>
+  <p class="status" id="st" aria-live="polite"></p>
+ </div>
+</div>
 <script>
 {
+const SITE='https://fpradomacat.github.io/how-heavy-is-that-money/',SITE_LABEL='fpradomacat.github.io/how-heavy-is-that-money';
+const INPREVIEW=/claude|anthropic/.test(location.hostname);
+const BASE=/^https?:$/.test(location.protocol)&&!INPREVIEW?location.origin+location.pathname:SITE;
+let last=null;
 const T={
  en:{loc:'en-US',title:'How heavy is that money?',
-  lede:'Type one of those numbers from the news and see it turned into banknotes, kilos, bags and elephants.',
+  lede:'Type one of those numbers from the news and see it as real cash: kilos of banknotes, bags, cows, elephants and more.',
   ph:'e.g. 183,000,340 or 2.5 million',amtLbl:'Amount',curLbl:'Currency',inBills:'In banknotes of',tryLbl:'Try',
   persp:'To put it in perspective',howTitle:'How we calculate it',
   howSub:'We count how many banknotes it takes and use the real size and weight of each one. Switching banknotes changes the result a lot:',
@@ -183,8 +234,9 @@ const T={
   scaleAria:'Scale: the money on one side, the equivalent object on the other',
   ex:[['1 million',1e6],['183,000,340',183000340],['1 billion',1e9],['50 billion',5e10]],
   rk:(a,n,d)=>`${a} is ${n} ${d} bills, weighing`,
-  empty:'Type an amount (e.g. 183,000,340, 2.5 million, 900k).',
-  say:(c,n)=>`As much as <b>${c} ${n}</b>.`,
+  empty:'Type an amount (e.g. 183,000,340, 2.5 million, 900k, 1kk).',sameW:'Same weight as',
+  say:(c,n)=>`As much as <b>${c} ${n}</b>.`,sayPlain:(c,n)=>`As much as ${c} ${n}.`,
+  share:'Share image',copy:'Copy link',copied:'Link copied',shareTitle:'Share it',fmtPost:'Post 4:5',fmtStory:'Story 9:16',fmtWide:'Link 1.91:1',shareNow:'Share…',download:'Download PNG',copyText:'Copy text + link',copiedLong:'Copied to the clipboard.',copyFail:'Could not copy. Copy the link from the address bar instead.',dlHint:'Downloads are blocked in this preview; they work on the published site.',cardTitle:'How heavy is that money?',inBillsShort:d=>`in ${d} bills`,shareText:(a,k,c,n)=>`${a} in cash weighs ${k}: as much as ${c} ${n}.`,close:'Close',
   lessOne:d=>`That's not even one ${d} bill. Try a smaller one.`,
   gsub:(a,w,d)=>`${a} (${w}) in ${d} bills.`,
   words:n=>n>=1e12?['trillion',1e12]:n>=1e9?['billion',1e9]:n>=1e6?['million',1e6]:null,
@@ -196,13 +248,13 @@ const T={
   lNote:l=>`Banknote after banknote, along the long side (${l} mm).`,
   aNote:'Banknotes side by side, no gaps.',
   countLab:'at one banknote per second, non-stop',countNote:d=>`Counting 8 hours a day: ${d}.`,
-  split:[['Split across the US',340e6,'about 340 million people'],['Split across the whole world',8.2e9,'about 8.2 billion people']],
+  splitIn:n=>`Split across ${n}`,worldCap:'Split across the whole world',people:n=>`about ${words(n)} people`,
   perHead:'for each person',family:(p,f)=>`Among ${p}. A family of 4 would get ${f}.`,
   times:(c,n)=>`${c} × ${n}`,
-  assume:['Large duffel bag: 60 L (50 L usable). Briefcase: 12 L usable. 20-ft container: 33 m³.','African elephant ~6 t · compact car ~1.3 t · empty Boeing 737-800 ~41 t · blue whale ~150 t · Eiffel Tower ironwork ~7,300 t.','Accepted amounts: 183,000,340 · 2.5 million · 900k · 1.2 billion (in English, 1 billion = 1,000 million).'],
+  assume:['Large duffel bag: 60 L (50 L usable). Briefcase: 12 L usable. 20-ft container: 33 m³.','African elephant ~6 t · compact car ~1.3 t · empty Boeing 737-800 ~41 t · blue whale ~150 t · Eiffel Tower ironwork ~7,300 t.','Accepted amounts: 183,000,340 · 2.5 million · 900k · 1kk (million) · 1kkk (billion) · 1.2 billion (in English, 1 billion = 1,000 million).'],
   thick:t=>`Thickness of each banknote: ~${t} mm.`},
  es:{loc:'es-AR',title:'¿Cuánto pesa esa plata?',
-  lede:'Escribí una cifra de esas que salen en las noticias y mirala convertida en billetes, kilos, bolsos y elefantes.',
+  lede:'Escribí una cifra de esas que salen en las noticias y mirala como plata de verdad: kilos de billetes, bolsos, vacas, elefantes y más.',
   ph:'Ej: 183.000.340 o 2,5 millones',amtLbl:'Monto',curLbl:'Moneda',inBills:'En billetes de',tryLbl:'Probá con',
   persp:'Para dimensionarlo',howTitle:'Cómo lo calculamos',
   howSub:'Contamos cuántos billetes hacen falta y usamos el tamaño y peso real de cada uno. Cambiar de billete cambia mucho el resultado:',
@@ -211,8 +263,9 @@ const T={
   scaleAria:'Balanza: la plata de un lado, el objeto equivalente del otro',
   ex:[['1 millón',1e6],['183.000.340',183000340],['1.000 millones',1e9],['50.000 millones',5e10]],
   rk:(a,n,d)=>`${a} son ${n} billetes de ${d}, que pesan`,
-  empty:'Escribí un monto (ej: 183.000.340, 2,5 millones, 900 mil).',
-  say:(c,n)=>`Lo mismo que <b>${c} ${n}</b>.`,
+  empty:'Escribí un monto (ej: 183.000.340, 2,5 millones, 900 mil, 1kk).',sameW:'Pesa lo mismo que',
+  say:(c,n)=>`Lo mismo que <b>${c} ${n}</b>.`,sayPlain:(c,n)=>`Lo mismo que ${c} ${n}.`,
+  share:'Compartir imagen',copy:'Copiar link',copied:'Link copiado',shareTitle:'Compartilo',fmtPost:'Post 4:5',fmtStory:'Historia 9:16',fmtWide:'Link 1,91:1',shareNow:'Compartir…',download:'Descargar PNG',copyText:'Copiar texto + link',copiedLong:'Copiado al portapapeles.',copyFail:'No se pudo copiar. Copiá el link desde la barra de direcciones.',dlHint:'En esta vista previa no se puede descargar; en el sitio publicado sí.',cardTitle:'¿Cuánto pesa esa plata?',inBillsShort:d=>`en billetes de ${d}`,shareText:(a,k,c,n)=>`${a} en efectivo pesan ${k}: lo mismo que ${c} ${n}.`,close:'Cerrar',
   lessOne:d=>`Ni siquiera llega a un billete de ${d}. Probá con uno más chico.`,
   gsub:(a,w,d)=>`${a} (${w}) en billetes de ${d}.`,
   words:n=>n>=1e12?['billones',1e12]:n>=1e9?['mil millones',1e9]:n>=1e6?['millones',1e6]:null,
@@ -224,24 +277,24 @@ const T={
   lNote:l=>`Billete tras billete, por el lado largo (${l} mm).`,
   aNote:'Billetes uno al lado del otro, sin dejar huecos.',
   countLab:'a un billete por segundo, sin parar',countNote:d=>`Contando 8 horas por día: ${d}.`,
-  split:[['Repartido en Argentina',46e6,'~46 millones de personas'],['Repartido en España',49e6,'~49 millones de personas']],
+  splitIn:n=>`Repartido en ${n}`,worldCap:'Repartido en el mundo entero',people:n=>`~${words(n)} de personas`,
   perHead:'para cada habitante',family:(p,f)=>`Entre ${p}. Una familia de 4 recibiría ${f}.`,
   times:(c,n)=>`${c} × ${n}`,
-  assume:['Bolso deportivo grande: 60 L (50 L útiles). Maletín: 12 L útiles. Contenedor de 20 pies: 33 m³.','Elefante africano ~6 t · auto compacto ~1,3 t · Boeing 737-800 vacío ~41 t · ballena azul ~150 t · hierro de la Torre Eiffel ~7.300 t.','Montos aceptados: 183.000.340 · 2,5 millones · 900 mil · 1,2 mil millones · 3 billones (en castellano, 1 billón = 1 millón de millones).'],
+  assume:['Bolso deportivo grande: 60 L (50 L útiles). Maletín: 12 L útiles. Contenedor de 20 pies: 33 m³.','Elefante africano ~6 t · auto compacto ~1,3 t · Boeing 737-800 vacío ~41 t · ballena azul ~150 t · hierro de la Torre Eiffel ~7.300 t.','Montos aceptados: 183.000.340 · 2,5 millones · 900 mil · 1kk (millón) · 1kkk (mil millones) · 1,2 mil millones · 3 billones (en castellano, 1 billón = 1 millón de millones).'],
   thick:t=>`Grosor de cada billete: ~${t} mm.`}
 };
 const CUR={
- USD:{n:{en:'USD · US dollar',es:'USD · Dólar'},def:100,src:{en:'Every US banknote weighs 1 g and measures 156 × 66.3 mm (US Bureau of Engraving and Printing).',es:'Todos los billetes de dólar pesan 1 g y miden 156 × 66,3 mm (Oficina de Grabado e Impresión de EE.UU.).'},
+ USD:{n:{en:'USD · US dollar',es:'USD · Dólar'},pop:[{en:'the US',es:'EE.UU.'},340e6],def:100,src:{en:'Every US banknote weighs 1 g and measures 156 × 66.3 mm (US Bureau of Engraving and Printing).',es:'Todos los billetes de dólar pesan 1 g y miden 156 × 66,3 mm (Oficina de Grabado e Impresión de EE.UU.).'},
   notes:[100,50,20,10,1].map(v=>({v,w:1.0,L:156,W:66.3,T:.11}))},
- EUR:{n:{en:'EUR · Euro',es:'EUR · Euro'},def:200,src:{en:'Sizes from the ECB; commonly cited approximate weights (0.6 g for €5 up to 1.1 g for €500). The €500 is no longer printed but is still legal tender.',es:'Medidas del BCE; pesos aproximados de uso común (0,6 g el de 5 € a 1,1 g el de 500 €). El de 500 € ya no se imprime pero sigue siendo de curso legal.'},
+ EUR:{n:{en:'EUR · Euro',es:'EUR · Euro'},pop:[{en:'the eurozone',es:'la eurozona'},350e6],def:200,src:{en:'Sizes from the ECB; commonly cited approximate weights (0.6 g for €5 up to 1.1 g for €500). The €500 is no longer printed but is still legal tender.',es:'Medidas del BCE; pesos aproximados de uso común (0,6 g el de 5 € a 1,1 g el de 500 €). El de 500 € ya no se imprime pero sigue siendo de curso legal.'},
   notes:[{v:500,w:1.1,L:160,W:82},{v:200,w:1.1,L:153,W:77},{v:100,w:1.0,L:147,W:77},{v:50,w:.9,L:140,W:77},{v:20,w:.8,L:133,W:72},{v:10,w:.7,L:127,W:67}].map(n=>({...n,T:.11}))},
- ARS:{n:{en:'ARS · Argentine peso',es:'ARS · Peso argentino'},def:20000,src:{en:'Peso Line banknotes measure 155 × 65 mm (Central Bank of Argentina). Estimated weight ≈0.97 g each.',es:'Los billetes de la Línea Peso miden 155 × 65 mm (BCRA). Peso estimado ≈0,97 g por billete.'},
+ ARS:{n:{en:'ARS · Argentine peso',es:'ARS · Peso argentino'},pop:[{en:'Argentina',es:'Argentina'},46e6],def:20000,src:{en:'Peso Line banknotes measure 155 × 65 mm (Central Bank of Argentina). Estimated weight ≈0.97 g each.',es:'Los billetes de la Línea Peso miden 155 × 65 mm (BCRA). Peso estimado ≈0,97 g por billete.'},
   notes:[20000,10000,2000,1000].map(v=>({v,w:.97,L:155,W:65,T:.11}))},
- GBP:{n:{en:'GBP · Pound sterling',es:'GBP · Libra esterlina'},def:50,src:{en:'Bank of England polymer notes (the £10 weighs ≈0.85 g); the others are estimated by area.',es:'Billetes de polímero del Banco de Inglaterra (el de £10 pesa ≈0,85 g); los demás, estimados por superficie.'},
+ GBP:{n:{en:'GBP · Pound sterling',es:'GBP · Libra esterlina'},pop:[{en:'the UK',es:'el Reino Unido'},69e6],def:50,src:{en:'Bank of England polymer notes (the £10 weighs ≈0.85 g); the others are estimated by area.',es:'Billetes de polímero del Banco de Inglaterra (el de £10 pesa ≈0,85 g); los demás, estimados por superficie.'},
   notes:[{v:50,w:1.05,L:146,W:77},{v:20,w:.95,L:139,W:73},{v:10,w:.85,L:132,W:69}].map(n=>({...n,T:.1}))},
- MXN:{n:{en:'MXN · Mexican peso',es:'MXN · Peso mexicano'},def:1000,src:{en:'Sizes from Banxico (G series, cotton paper); weight estimated by area.',es:'Medidas de Banxico (familia G, papel de algodón); peso estimado por superficie.'},
+ MXN:{n:{en:'MXN · Mexican peso',es:'MXN · Peso mexicano'},pop:[{en:'Mexico',es:'México'},131e6],def:1000,src:{en:'Sizes from Banxico (G series, cotton paper); weight estimated by area.',es:'Medidas de Banxico (familia G, papel de algodón); peso estimado por superficie.'},
   notes:[{v:1000,w:.96,L:153,W:65},{v:500,w:.92,L:146,W:65},{v:200,w:.87,L:139,W:65}].map(n=>({...n,T:.11}))},
- BRL:{n:{en:'BRL · Brazilian real',es:'BRL · Real brasileño'},def:200,src:{en:'Sizes from the Central Bank of Brazil (2nd series); weight estimated by area.',es:'Medidas del Banco Central do Brasil (2ª familia); peso estimado por superficie.'},
+ BRL:{n:{en:'BRL · Brazilian real',es:'BRL · Real brasileño'},pop:[{en:'Brazil',es:'Brasil'},212e6],def:200,src:{en:'Sizes from the Central Bank of Brazil (2nd series); weight estimated by area.',es:'Medidas del Banco Central do Brasil (2ª familia); peso estimado por superficie.'},
   notes:[{v:200,w:.89,L:142,W:65},{v:100,w:1.06,L:156,W:70}].map(n=>({...n,T:.11}))}
 };
 // [icon, unit, {lang:[singular, plural]}] — an item without a language key is skipped in that language
@@ -308,6 +361,7 @@ function parseAmount(str){
  else if(/^(mill|m$|mn$)/.test(w))mult=1e6;
  else if(/^(mil$|k$|thousand)/.test(w))mult=1e3;
  else if(/^(b|bn)$/.test(w))mult=1e9;
+ else if(/^k{2,4}$/.test(w))mult=1000**w.length;
  const d=n.lastIndexOf('.'),c=n.lastIndexOf(',');
  if(d>=0&&c>=0){const dec=d>c?'.':',';n=n.split(dec==='.'?',':'.').join('').replace(dec,'.')}
  else if(d>=0||c>=0){const sep=d>=0?'.':',',parts=n.split(sep);
@@ -316,13 +370,14 @@ function parseAmount(str){
 }
 
 try{const s=JSON.parse(localStorage.getItem('cuantopesa')||'null');if(s&&CUR[s.cur]){state={cur:s.cur,den:s.den};if(s.amt)$('amt').value=s.amt;if(T[s.lang])lang=s.lang}}catch(e){}
+try{const q=new URLSearchParams(location.search);if(T[q.get('l')])lang=q.get('l');if(CUR[q.get('c')]){state.cur=q.get('c');state.den=+q.get('d')||CUR[state.cur].def}if(+q.get('a')>0)$('amt').value=nf(+q.get('a'),2)}catch(e){}
 
 function applyLang(){
  const t=L();document.documentElement.lang=lang;document.title=t.title;
  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t[el.dataset.t]);
  document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
  $('amt').placeholder=t.ph;$('amt').setAttribute('aria-label',t.amtLbl);$('cur').setAttribute('aria-label',t.curLbl);
- $('scale').setAttribute('aria-label',t.scaleAria);
+ $('scale').setAttribute('aria-label',t.scaleAria);$('dlgX').setAttribute('aria-label',t.close);
  $('cur').innerHTML=Object.keys(CUR).map(k=>`<option value="${k}">${CUR[k].n[lang]}</option>`).join('');$('cur').value=state.cur;
  $('ex').innerHTML=t.ex.map(([x,v])=>`<button type="button" class="chip" data-v="${v}">${x}</button>`).join('');
  renderDens();update();
@@ -364,10 +419,12 @@ function drawScale(kg,o,c){
 function update(){
  const t=L(),C=CUR[state.cur],cur=state.cur,amt=parseAmount($('amt').value);
  try{localStorage.setItem('cuantopesa',JSON.stringify({...state,amt:$('amt').value,lang}))}catch(e){}
- if(!(amt>0)){$('rk').textContent=t.empty;$('rkg').textContent='—';$('rsay').textContent='';$('gsub').textContent='';$('grid').innerHTML='';$('tbl').innerHTML='';return}
+ if(!(amt>0)){last=null;$('rk').textContent=t.empty;$('rkg').textContent='—';$('rsay').textContent='';$('gsub').textContent='';$('grid').innerHTML='';$('tbl').innerHTML='';return}
  const N=C.notes.find(n=>n.v===state.den),bills=amt/N.v,kg=bills*N.w/1000,den=money(N.v,cur);
  const vol=bills*N.L*N.W*N.T/1e6,h=bills*N.T/1000,len=bills*N.L/1000,area=bills*N.L*N.W/1e6;
  const hw=pick(W,kg);
+ last={amt,cur,kg,hw,den,denV:N.v};
+ try{if(!INPREVIEW)history.replaceState(null,'','?'+params())}catch(e){}
  $('rk').textContent=t.rk(money(amt,cur),nf(Math.ceil(bills)),den);
  countUp($('rkg'),kg,kgf);
  $('rsay').innerHTML=bills<1?t.lessOne(den):t.say(cnt(hw.c),nm(hw.o,hw.c));
@@ -381,22 +438,91 @@ function update(){
   [t.caps[3],mf(len),t.times(cnt(bl.c),sg(bl.o)),icons(bl.o[0],bl.c),t.lNote(nf(N.L,1))],
   [t.caps[4],af(area),`${cnt(ba.c)} ${nm(ba.o,ba.c)}`,icons(ba.o[0],ba.c),t.aNote],
   [t.caps[5],dur(bills),t.countLab,'',t.countNote(dur(bills*3))],
-  ...t.split.map(([cap,pop,who])=>[cap,money(amt/pop,cur),t.perHead,'',t.family(who,money(amt/pop*4,cur))])
+  ...[[t.splitIn(C.pop[0][lang]),C.pop[1]],[t.worldCap,8.2e9]].map(([cap,pop])=>[cap,money(amt/pop,cur),t.perHead,'',t.family(t.people(pop),money(amt/pop*4,cur))])
  ];
- $('grid').innerHTML=cards.map(([cap,num,lab,ic,note],i)=>`<article class="card" style="--i:${i}"><div class="cap">${cap}</div><div class="num">${num}</div><p class="lab">${lab}</p><div class="icons" style="--i:${i}">${ic}</div><p class="note">${note}</p></article>`).join('');
+ const eqs=W.filter(o=>o[2][lang]).map(o=>[o,kg/o[1]]).filter(([o,c])=>c>=.05&&c<=1e6);
+ const strip=eqs.length?`<article class="card eqcard" style="--i:0"><div class="cap">${t.sameW}</div><div class="eqs">${eqs.map(([o,c],j)=>`<div class="eq" style="--d:${j}"><svg class="ic" style="--d:${j}"><use href="#${o[0]}"/></svg><span><b class="num">${cnt(c)}</b> ${nm(o,c)}</span></div>`).join('')}</div></article>`:'';
+ $('grid').innerHTML=strip+cards.map(([cap,num,lab,ic,note],i)=>`<article class="card" style="--i:${i+1}"><div class="cap">${cap}</div><div class="num">${num}</div><p class="lab">${lab}</p><div class="icons" style="--i:${i}">${ic}</div><p class="note">${note}</p></article>`).join('');
  $('tbl').innerHTML=`<thead><tr>${t.th.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>`+
   C.notes.map(n=>{const b=amt/n.v;return `<tr class="${n.v===N.v?'on':''}"><td>${money(n.v,cur)}</td><td>${nf(n.L,1)} × ${nf(n.W,1)} mm</td><td>${nf(n.w,2)} g</td><td>${nf(Math.ceil(b))}</td><td>${kgf(b*n.w/1000)}</td></tr>`}).join('')+'</tbody>';
  $('assume').innerHTML=[C.src[lang],t.thick(nf(N.T,2)),...t.assume].map(x=>`<li>${x}</li>`).join('');
 }
 
 let tm;
-$('amt').addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(update,350)});
+function liveFormat(el){
+ const raw=el.value,d=lang==='es'?',':'.',g=lang==='es'?'.':',';
+ const okChars=new RegExp('^[\\d'+(g==='.'?'\\.':',')+(d==='.'?'\\.':',')+']*$');
+ if(!okChars.test(raw))return;
+ const nd=raw.split(d).length-1;if(nd>1)return;
+ const [ip,dp]=raw.split(d);
+ let digits=ip.replace(/\D/g,'');if(!digits&&nd===0)return;
+ digits=digits.replace(/^0+(?=\d)/,'');
+ let out=(digits||'0').replace(/\B(?=(\d{3})+(?!\d))/g,g)+(nd?d+dp.replace(/\D/g,''):'');
+ if(out===raw)return;
+ const caret=el.selectionStart??raw.length;
+ const sig=c=>/\d/.test(c)||c===d;
+ let n=0;for(let i=0;i<caret;i++)if(sig(raw[i]))n++;
+ if(!digits&&nd)n++;
+ let pos=0;while(pos<out.length&&n>0){if(sig(out[pos]))n--;pos++}
+ el.value=out;try{el.setSelectionRange(pos,pos)}catch(e){}
+}
+$('amt').addEventListener('input',e=>{if(!e.isComposing)liveFormat(e.target);clearTimeout(tm);tm=setTimeout(update,350)});
 $('f').addEventListener('submit',e=>{e.preventDefault();update()});
 $('cur').addEventListener('change',e=>{state.cur=e.target.value;state.den=CUR[state.cur].def;renderDens();update()});
 $('dens').addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(!b)return;state.den=+b.dataset.d;renderDens();update()});
 $('ex').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;$('amt').value=nf(+b.dataset.v);update()});
 document.querySelector('.lang').addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b||b.dataset.l===lang)return;
  const v=parseAmount($('amt').value);lang=b.dataset.l;if(v>0)$('amt').value=nf(v,2);applyLang()});
+const params=()=>new URLSearchParams({a:String(last.amt),c:last.cur,d:String(last.denV),l:lang}).toString();
+const shareURL=()=>BASE+'?'+params();
+const shareText=()=>{const t=L();return t.shareText(money(last.amt,last.cur),kgf(last.kg),cnt(last.hw.c),nm(last.hw.o,last.hw.c))};
+function svgImage(){
+ const defs=document.querySelector('svg defs').outerHTML;
+ let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 380" width="1040" height="760">${defs}${$('scale').innerHTML}</svg>`;
+ s=s.split('var(--card,#fff)').join('#0f4d32');
+ return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s)});
+}
+function wrapText(x,txt,X,y,maxW,lh){const ws=txt.split(' ');let line='';for(const w of ws){const test=line?line+' '+w:w;if(x.measureText(test).width>maxW&&line){x.fillText(line,X,y);line=w;y+=lh}else line=test}x.fillText(line,X,y);return y}
+async function renderCard(fmt){
+ const [Wd,Ht]=fmt==='story'?[1080,1920]:fmt==='wide'?[1200,630]:[1080,1350];
+ const cv=document.createElement('canvas');cv.width=Wd;cv.height=Ht;const x=cv.getContext('2d');
+ try{await Promise.all([document.fonts.load('900 100px Archivo'),document.fonts.load('800 40px Archivo'),document.fonts.load('600 40px Inter')])}catch(e){}
+ const g=x.createLinearGradient(0,0,Wd,Ht);g.addColorStop(0,'#1b6b47');g.addColorStop(.55,'#0f4d32');g.addColorStop(1,'#0a3322');x.fillStyle=g;x.fillRect(0,0,Wd,Ht);
+ const img=await svgImage(),t=L(),wide=fmt==='wide',story=fmt==='story',pad=wide?60:80,colW=wide?520:Wd-pad*2;
+ const font=(w,sz,f)=>{x.font=`${w} ${sz}px ${f==='a'?'Archivo, Inter, sans-serif':'Inter, sans-serif'}`};
+ const fit=(txt,w,sz,max)=>{font(w,sz,'a');while(x.measureText(txt).width>max&&sz>20){sz-=2;font(w,sz,'a')}};
+ let y=pad+(story?120:0);
+ x.fillStyle='#cfe6d7';font(800,wide?30:44,'a');y+=wide?30:44;x.fillText(t.cardTitle,pad,y);
+ y+=wide?66:120;x.fillStyle='#fff';const am=money(last.amt,last.cur);fit(am,800,wide?56:86,colW);x.fillText(am,pad,y);
+ y+=wide?40:60;x.fillStyle='#b9d6c4';font(500,wide?24:38,'i');x.fillText(t.inBillsShort(last.den),pad,y);
+ y+=wide?150:250;x.fillStyle='#f5c542';const k=kgf(last.kg);fit(k,900,wide?150:240,colW);x.fillText(k,pad,y);
+ y+=wide?56:96;x.fillStyle='#fff';font(600,wide?28:48,'i');y=wrapText(x,t.sayPlain(cnt(last.hw.c),nm(last.hw.o,last.hw.c)),pad,y,colW,wide?36:60);
+ if(img){if(wide){const sw=560,sh=sw*380/520;x.drawImage(img,Wd-pad-sw+20,(Ht-sh)/2-10,sw,sh)}
+  else{const top=y+50,bottom=Ht-pad-60-(story?120:0);const sh=Math.min(bottom-top,(Wd-pad*2)*380/520),sw=sh*520/380;x.drawImage(img,(Wd-sw)/2,top+(bottom-top-sh)/2,sw,sh)}}
+ x.fillStyle='#9cc7ad';font(500,wide?20:28,'i');x.fillText(SITE_LABEL,pad,Ht-pad+(wide?20:10)-(story?120:0));
+ return cv;
+}
+window.__hhtm={renderCard};
+let fmt='post',blob=null,opener=null;
+async function refreshPreview(){
+ const cv=await renderCard(fmt);$('prev').src=cv.toDataURL('image/png');$('prev').alt=shareText();
+ blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+ let can=false;try{can=!!(navigator.canShare&&navigator.canShare({files:[new File([blob],'x.png',{type:'image/png'})]}))}catch(e){}
+ $('nativeShare').hidden=!can;
+}
+const status=m=>{$('st').textContent=m};
+async function copy(txt,okMsg){try{await navigator.clipboard.writeText(txt);return okMsg}catch(e){return L().copyFail}}
+function openDlg(){if(!last)return;opener=document.activeElement;$('dlg').hidden=false;status('');document.body.style.overflow='hidden';$('dlgX').focus();refreshPreview()}
+function closeDlg(){$('dlg').hidden=true;document.body.style.overflow='';opener&&opener.focus()}
+$('shareBtn').addEventListener('click',openDlg);
+$('dlgX').addEventListener('click',closeDlg);
+$('dlg').addEventListener('click',e=>{if(e.target===$('dlg'))closeDlg()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('dlg').hidden)closeDlg()});
+$('fmt').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;fmt=b.dataset.f;document.querySelectorAll('#fmt [data-f]').forEach(c=>c.setAttribute('aria-pressed',c===b));refreshPreview()});
+$('dl').addEventListener('click',()=>{if(!blob)return;const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`how-heavy-${Math.round(last.amt)}-${last.cur}-${fmt}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);if(INPREVIEW)status(L().dlHint)});
+$('nativeShare').addEventListener('click',async()=>{try{await navigator.share({files:[new File([blob],'how-heavy.png',{type:'image/png'})],text:shareText()+' '+shareURL()})}catch(e){}});
+$('copy2').addEventListener('click',async()=>status(await copy(shareText()+' '+shareURL(),L().copiedLong)));
+$('copyBtn').addEventListener('click',async()=>{const b=$('copyBtn'),m=await copy(shareURL(),L().copied);b.textContent=m===L().copied?'✓ '+m:L().copy;setTimeout(()=>{b.textContent=L().copy},1800)});
 applyLang();
 }
 </script>
