@@ -47,6 +47,12 @@ GitHub Pages → Settings → Pages → Deploy from branch → `master` / `root`
 - `sitemap.xml`, to submit in Google Search Console
 - Open Graph / Twitter image: `og-image.jpg` (1200×630, ~50 KB, small enough for WhatsApp previews)
 
+## Author
+
+Made by Fede · Instagram [@soypradito](https://instagram.com/soypradito)
+
+If it helped you, you can [buy me a coffee](https://buymeacoffee.com/soypradito) ☕
+
 ## License
 
 MIT
