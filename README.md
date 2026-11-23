@@ -52,7 +52,3 @@ GitHub Pages → Settings → Pages → Deploy from branch → `master` / `root`
 Made by Fede · Instagram [@soypradito](https://instagram.com/soypradito)
 
 If it helped you, you can [buy me a coffee](https://buymeacoffee.com/soypradito) ☕
-
-## License
-
-MIT
